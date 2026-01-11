@@ -1,0 +1,123 @@
+# =========================
+# COMPLEX MAZE SCRIPT
+# Player spawn: (0, 0, 0)
+# =========================
+
+print("create exists:", "create" in globals())
+
+import time
+print("Current Time:", time.ctime())
+
+WALL_SIZE = (5, 10, 1)
+WALL_HEIGHT_Y = 5
+CELL = 6
+
+
+def wall(name, x, z):
+    p = create.part(name)
+    p.pos = (x, WALL_HEIGHT_Y, z)
+    p.size = WALL_SIZE
+    p.CanCollide = True
+    p.Colour = "#FFFF00"
+    return p
+
+
+# =========================
+# START PLATFORM
+# =========================
+start = create.part("Start")
+start.pos = (0, 1, 0)
+start.size = (6, 1, 6)
+start.CanCollide = True
+start.Colour = "#00AAFF"
+
+
+# =========================
+# OUTER BOUNDARY
+# =========================
+
+# Front & Back
+for i in range(-5, 6):
+    wall(f"Front_{i}", i * CELL, 42)
+    wall(f"Back_{i}", i * CELL, -6)
+
+# Left & Right
+for i in range(0, 9):
+    w = create.part(f"Left_{i}")
+    w.pos = (-30, WALL_HEIGHT_Y, i * CELL)
+    w.size = (1, 10, 5)
+    w.CanCollide = True
+    w.Colour = "#FFFF00"
+
+    w = create.part(f"Right_{i}")
+    w.pos = (30, WALL_HEIGHT_Y, i * CELL)
+    w.size = (1, 10, 5)
+    w.CanCollide = True
+    w.Colour = "#FFFF00"
+
+
+# =========================
+# INNER MAZE (MAIN PATH)
+# =========================
+
+wall("M1", -6, 6)
+wall("M2", 0, 6)
+wall("M3", 6, 6)
+
+wall("M4", -12, 12)
+wall("M5", 6, 12)
+wall("M6", 12, 12)
+
+wall("M7", -12, 18)
+wall("M8", 0, 18)
+wall("M9", 12, 18)
+
+wall("M10", -6, 24)
+wall("M11", 6, 24)
+
+wall("M12", -12, 30)
+wall("M13", 0, 30)
+wall("M14", 12, 30)
+
+
+# =========================
+# DEAD ENDS (TROLL PATHS 😈)
+# =========================
+
+# Left traps
+wall("D1", -18, 6)
+wall("D2", -18, 12)
+wall("D3", -24, 12)
+
+wall("D4", -24, 24)
+wall("D5", -18, 24)
+
+# Right traps
+wall("D6", 18, 6)
+wall("D7", 24, 6)
+wall("D8", 24, 18)
+
+wall("D9", 18, 24)
+wall("D10", 24, 30)
+
+
+# =========================
+# TIGHT CORRIDORS
+# =========================
+
+for i in range(1, 5):
+    wall(f"C1_{i}", -6, i * CELL + 6)
+
+for i in range(2, 6):
+    wall(f"C2_{i}", 6, i * CELL + 6)
+
+
+# =========================
+# END / WIN AREA
+# =========================
+
+goal = create.part("Goal")
+goal.pos = (0, 2, 40)
+goal.size = (8, 4, 2)
+goal.CanCollide = False
+goal.Colour = "#00FF00"
