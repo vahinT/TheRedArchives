@@ -1,0 +1,3 @@
+def max_in_list(lst):
+    return max(lst) if lst else None
+# Sample file 89
