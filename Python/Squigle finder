@@ -1,0 +1,6 @@
+print("Squigle Finder")
+Hello = 1
+while True:
+    print(Hello * 2)
+    print()
+    print()
