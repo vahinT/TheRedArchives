@@ -1,0 +1,73 @@
+# =========================
+# SIMPLE MAZE SCRIPT
+# Player spawn: (0, 0, 0)
+# =========================
+print("create exists:", "create" in globals())
+
+
+WALL_SIZE = (5, 10, 1)   # width, height, depth
+WALL_HEIGHT_Y = 5       # wall center Y
+CELL = 6                # spacing between cells
+
+
+def wall(name, x, z):
+    p = create.part(name)
+    p.pos = (x, WALL_HEIGHT_Y, z)
+    p.size = WALL_SIZE
+    p.CanCollide = True
+    p.Colour = "#FFFF00"
+    return p
+
+
+# -------------------------
+# OUTER BOUNDARY
+# -------------------------
+
+# Front wall
+for i in range(-3, 4):
+    wall(f"Front_{i}", i * CELL, 30)
+
+# Back wall
+for i in range(-3, 4):
+    wall(f"Back_{i}", i * CELL, -6)
+
+# Left wall
+for i in range(0, 6):
+    w = create.part(f"Left_{i}")
+    w.pos = (-18, WALL_HEIGHT_Y, i * CELL)
+    w.size = (1, 10, 5)
+    w.CanCollide = True
+    w.Colour = "#FFFF00"
+
+# Right wall
+for i in range(0, 6):
+    w = create.part(f"Right_{i}")
+    w.pos = (18, WALL_HEIGHT_Y, i * CELL)
+    w.size = (1, 10, 5)
+    w.CanCollide = True
+    w.Colour = "#FFFF00"
+
+
+# -------------------------
+# INNER MAZE WALLS
+# -------------------------
+
+wall("Maze_1", -6, 6)
+wall("Maze_2", 0, 6)
+wall("Maze_3", 6, 6)
+
+wall("Maze_4", -6, 12)
+wall("Maze_5", 6, 12)
+
+wall("Maze_6", -6, 18)
+wall("Maze_7", 0, 18)
+
+# -------------------------
+# END WALL (GOAL AREA)
+# -------------------------
+
+goal = create.part("Goal")
+goal.pos = (0, 2, 24)
+goal.size = (6, 4, 1)
+goal.CanCollide = False
+goal.Colour = "#00FF00"

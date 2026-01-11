@@ -1,0 +1,19 @@
+# create a yellow part.
+p = create.part("YellowBlock")
+
+# position it 3 units in front of the player
+p.pos = (0, 0, 3)
+
+# small size
+p.size = (5, 5, 5)
+
+# collidable
+p.CanCollide = True
+
+# yellow color
+p.Colour = "#FFFF00"
+
+import random as r
+
+for i in range(1, 12):
+    print(r.randint(1, 10))
